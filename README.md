@@ -1,16 +1,21 @@
 # Game-Project
 
-LIBRARIES
--pygame
+LIBRARIES TO INSTALL
+-pyGame
 -pyTMX
 
 ISSUE:
-To make the ball bounce, all wall X and Y positions were appended to 2 arrays.
-The ball would then move with an X velocity and if a collision was detected, it would check if the ball's X pos was in the X array.
-If it was, it would reflect the ball along x-axis.
-This also occured for the Y positions and axis.
-However, the position of the ball on collision was never exactly equal to the X/Y of the walls, usually off by -4 to 4 pixels.
-So if the ball collided with the corner of a wall, it wouldn't know whether to reflect X or Y, since the X and Y positions overlapped
+If the ball hits the corner of a collider (wall), it does not know which direction to deflect to, often deflecting in the wrong direction.
+
+HOW IT WORKS SO FAR:
+If the ball collides with a change in xPos, its xVel is reflected (*-1).
+If the ball collides with a change in yPos, its yVel is reflected (*-1).
+
+Upon a wall collision, the position of the ball is checked with an array containing all wall positions. If the ball's position is with the wall, the rebound is allowed to occur.
+
 
 TODO:
-- redo the ball collision and rebound code
+- redo/modify the ball collision and rebound code
+
+WHERE:
+- found in the sprites.py file under the class BULLET and OBSTACLE
