@@ -164,7 +164,7 @@ class Game:
 
 
         draw_player_health(self.screen, WIDTH/2 -200, HEIGHT-50, self.player.health / PLAYER_HEALTH)
-        self.draw_text('Health                      Enemies: {}'.format(len(self.mobs)), self.hud_font, 30, WHITE, WIDTH -100, HEIGHT - 50, align="topright")
+        self.draw_text('Health                      Enemies: {}'.format(len(self.mobs)), self.hud_font, 30, WHITE, WIDTH -220, HEIGHT - 50, align="topright")
 
         pg.display.flip()
 
