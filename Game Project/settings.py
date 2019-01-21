@@ -13,8 +13,8 @@ YELLOW = (255, 255, 0)
 BROWN = (106, 55, 5)
 
 # game settings
-WIDTH = 1024
-HEIGHT = 768
+WIDTH = 1280
+HEIGHT = 720
 FPS = 64
 TITLE = "Tank Royale"
 
@@ -40,7 +40,7 @@ GRIDHEIGHT = HEIGHT / TILESIZE
 
 
 # Player settings
-PLAYER_HEALTH = 100
+PLAYER_HEALTH = 1000
 PLAYER_SPEED = 150
 PLAYER_ROT_SPEED = 200
 PLAYER_IMG = 'tank.png'
@@ -63,7 +63,7 @@ BULLET_HIT_RECT = pg.Rect(0, 0, 12, 12)
 MOB_IMG = 'enemytank.png'
 BULLETENEMY_IMG = 'bulletEnemy.png'
 MOB_SPEED = 100
-MOB_HIT_RECT = pg.Rect(0, 0, 64, 64)
+MOB_HIT_RECT = pg.Rect(0, 0, 12, 12)
 MOB_HEALTH = 50
 MOB_DAMAGE = 30
 MOB_KNOCKBACK = 20

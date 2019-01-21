@@ -252,7 +252,8 @@ class Bullet(pg.sprite.Sprite):
         spread = uniform(-GUN_SPREAD, GUN_SPREAD)
         self.vel = dir.rotate(spread) * BULLET_SPEED
         self.spawn_time = pg.time.get_ticks()
-        self.collision = False
+        self.collisionX = False
+        self.collisionY = False
 
 
 
@@ -260,20 +261,25 @@ class Bullet(pg.sprite.Sprite):
 
     def update(self):
         self.rect.center = self.pos
-        self.pos += self.vel * self.game.dt
+
 
         if not pg.sprite.spritecollideany(self, self.game.walls):
-            self.collision = False
+            self.collisionX = False
+            self.collisionY = False
 
-        if pg.sprite.spritecollideany(self, self.game.walls) and self.collision == False:
+        self.pos.x += self.vel.x * self.game.dt
 
+        if pg.sprite.spritecollideany(self, self.game.walls) and self.collisionX == False:
             if (round(self.pos.x, 0)) in xList: #checks if X pos collision is an X pos wall
                 self.vel.x *= -1
-                self.collision = True
-
-            elif (round(self.pos.y, 0)) in yList: #checks if Y pos collision is an Y pos wall
+                self.collisionX = True
+                self.pos += self.vel * self.game.dt
+        self.pos.y += self.vel.y * self.game.dt
+        if pg.sprite.spritecollideany(self, self.game.walls) and self.collisionY == False and self.collisionX == False:
+            if (round(self.pos.y, 0)) in yList: #checks if Y pos collision is an Y pos wall
                 self.vel.y *= -1
-                self.collision = True
+                self.collisionY = True
+                self.pos += self.vel * self.game.dt
 
 
 
@@ -305,23 +311,28 @@ class BulletEnemy(pg.sprite.Sprite):
 
     def update(self):
         self.rect.center = self.pos
-        self.pos += self.vel * self.game.dt
 
         if not pg.sprite.spritecollideany(self, self.game.walls):
             self.collision = False
 
-
+        self.pos.x += self.vel.x * self.game.dt
 
         if pg.sprite.spritecollideany(self, self.game.walls) and self.collision == False:
 
-
-            if (round(self.pos.x, 0)) in xList:
+            if (round(self.pos.x, 0)) in xList:  # checks if X pos collision is an X pos wall
                 self.vel.x *= -1
                 self.collision = True
-
-            elif(round(self.pos.y, 0)) in yList:
+                self.pos += self.vel * self.game.dt
+        self.pos.y += self.vel.y * self.game.dt
+        if pg.sprite.spritecollideany(self, self.game.walls) and self.collision == False:
+            if (round(self.pos.y, 0)) in yList:  # checks if Y pos collision is an Y pos wall
                 self.vel.y *= -1
                 self.collision = True
+                self.pos += self.vel * self.game.dt
+
+
+        if pg.time.get_ticks() - self.spawn_time > BULLET_LIFETIME:
+            self.kill()
 
 
 
@@ -337,9 +348,9 @@ class Obstacle(pg.sprite.Sprite):
         self.y = y
         self.rect.x = x
         self.rect.y = y
-        for n in range(-1, 1):
+        for n in range(-1,1):
             xList.append(int(round(x + n, 0)))  #append leftwall + adjust
-            xList.append(int(round(x + w + n, 0)))  #append rightwall + adjust
+            xList.append(int(round(x + w + n , 0)))  #append rightwall + adjust
             yList.append(int(round(y + n, 0)))  #append topwall
             yList.append(int(round(y + h + n, 0)))  #append bottomWall + adjust
 
