@@ -1,4 +1,4 @@
-# Steel Hero - built with PyGame
+# Steel Hero
 
 LIBRARIES TO INSTALL
 - pyGame
